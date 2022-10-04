@@ -1,6 +1,6 @@
 version 1.0
 
-import "../../tasks/task_deeptools.wdl" as deeptools
+import "../../tasks/task_deeptools.wdl" as task_deeptools
 
 workflow wf_deeptools{
     meta {

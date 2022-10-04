@@ -2,7 +2,7 @@ version: 1.2
 workflows:
    - name: "Deeptools"
      subclass: WDL
-     primaryDescriptorPath: /workflows/subwf-deeptools.wdl
+     primaryDescriptorPath: /workflows/deeptools/subwf-deeptools.wdl
      filters:  # Only develop or master branches and localAligner/** tags
          branches:
              - main

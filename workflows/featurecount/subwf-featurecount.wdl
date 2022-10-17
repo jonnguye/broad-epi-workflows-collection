@@ -2,10 +2,10 @@ version 1.0
 
 import "../../tasks/task_featurecount.wdl" as task_featurecount
 
-workflow wf_deeptools{
+workflow wf_featurecount{
     meta {
         version: 'v0.1'
-            author: 'Eugenio Mattei (emattei@broadinstitute.org) @ Broad Institute of MIT and Harvard'
+            author: 'Siddarth Wekhande (swekhand@broadinstitute.org) @ Broad Institute of MIT and Harvard'
             description: 'Broad Institute of MIT and Harvard: Feature counts.'
     }
 
@@ -23,7 +23,7 @@ workflow wf_deeptools{
         String gene_naming = "gene_name"
     }
 
-    call share_task_feature_counts.feature_counts_rna as count{
+    call task_featurecount.feature_counts_rna as count{
         input:
             multimapper = include_multimappers,
             intron = include_introns,

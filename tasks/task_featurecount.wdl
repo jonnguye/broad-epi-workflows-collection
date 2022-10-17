@@ -56,7 +56,7 @@ task feature_counts_rna {
             ${if paired then "-p" else ""} \
             temp_input.bam >> ${featurecount_log}
 
-            mv exon_count_matrix.summary summary.exon.featurecount.txt
+            mv exon_count_matrix.txt.summary summary.exon.featurecount.txt
 
         temp_filename="temp_input.bam.featureCounts.bam"
 
@@ -72,7 +72,7 @@ task feature_counts_rna {
             ${if paired then "-p" else ""} \
             $temp_filename >> ${featurecount_log}
 
-            mv intron_count_matrix.summary summary.intron.featurecount.txt
+            mv intron_count_matrix.txt.summary summary.intron.featurecount.txt
 
             temp_filename="$temp_filename.featureCounts.bam"
         fi

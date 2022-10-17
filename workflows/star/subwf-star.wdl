@@ -20,6 +20,7 @@ workflow wf_deeptools{
         String genome_name
         Int? cpus = 16
         String? docker
+        Int? disk_gb = 100
     }
 
     call task_star.rna_align as align {
@@ -29,7 +30,8 @@ workflow wf_deeptools{
             genome_name = genome_name,
             genome_index_tar = idx_tar,
             prefix = prefix,
-            cpus = cpus
+            cpus = cpus,
+            disk_gb = disk_gb
     }
     
     output {

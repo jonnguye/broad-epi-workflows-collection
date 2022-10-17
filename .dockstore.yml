@@ -1,6 +1,6 @@
 version: 1.2
 workflows:
-    - name: "Deeptools"
+   - name: "Deeptools"
      subclass: WDL
      primaryDescriptorPath: /workflows/deeptools/subwf-deeptools.wdl
      filters:  # Only develop or master branches and localAligner/** tags
@@ -9,7 +9,7 @@ workflows:
          tags:
              - /.*/
              
-    - name: "STAR"
+   - name: "STAR"
      subclass: WDL
      primaryDescriptorPath: /workflows/star/subwf-star.wdl
      filters:  # Only develop or master branches and localAligner/** tags

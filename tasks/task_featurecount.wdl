@@ -33,7 +33,6 @@ task feature_counts_rna {
     
     #Int disk_gb = round(20.0 + 4 * input_file_size_gb)
 
-
     String out_bam = "${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.bam"
     String out_bai = "${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.bam.bai"
     String featurecount_log = "${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.featurecount.log"
@@ -52,7 +51,7 @@ task feature_counts_rna {
             -a ${gtf} \
             -t exon \
             -g ${gene_naming} \
-            -o exon_count_matrix \
+            -o exon_count_matrix.txt \
             -R BAM \
             ${if paired then "-p" else ""} \
             temp_input.bam >> ${featurecount_log}

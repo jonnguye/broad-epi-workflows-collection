@@ -17,6 +17,7 @@ task feature_counts_rna {
 
         Boolean multimapper
         Boolean intron
+        Boolean paired
         File bam
         File gtf
         String gene_naming = "gene_name"
@@ -53,6 +54,7 @@ task feature_counts_rna {
             -g ${gene_naming} \
             -o ${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.featurecount.txt \
             -R BAM \
+            ${if paired then "-p" else ""} \
             temp_input.bam >> ${featurecount_log}
 
             mv *.featurecount.txt.summary summary.exon.featurecount.txt
@@ -68,6 +70,7 @@ task feature_counts_rna {
             -g ${gene_naming} \
             -o ${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.featurecount.txt \
             -R BAM \
+            ${if paired then "-p" else ""} \
             $temp_filename >> ${featurecount_log}
 
             mv *.featurecount.txt.summary summary.intron.featurecount.txt

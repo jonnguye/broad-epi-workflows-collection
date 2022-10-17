@@ -17,6 +17,7 @@ workflow wf_featurecount{
         File gtf
         Boolean include_multimappers = false
         Boolean include_introns = false
+        Boolean paired = true
         String gene_naming = "gene_name"
     }
 
@@ -28,7 +29,8 @@ workflow wf_featurecount{
             gtf = gtf,
             gene_naming = gene_naming,
             genome_name = genome_name,
-            prefix = prefix
+            prefix = prefix,
+            paired = paired
     }
 
     output {

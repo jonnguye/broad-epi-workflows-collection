@@ -37,7 +37,7 @@ workflow wf_featurecount{
         File rna_featurecount_alignment = count.rna_featurecount_alignment
         File rna_featurecount_alignment_index = count.rna_featurecount_alignment_index
         File rna_featurecount_exon_txt = count.rna_featurecount_exon_txt
-        File? rna_featurecount_intron_txt = count.rna_featurecount_intron_txt
+        #File? rna_featurecount_intron_txt = count.rna_featurecount_intron_txt
 
     }
 }

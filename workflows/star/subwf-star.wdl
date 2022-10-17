@@ -36,5 +36,6 @@ workflow wf_deeptools{
         File rna_alignment_raw = align.rna_alignment
         File rna_alignment_index = align.rna_alignment_index
         File rna_alignment_log = align.rna_alignment_log
+    }
 }
 

@@ -28,12 +28,10 @@ workflow wf_deeptools{
             prefix = prefix
     }
 
-
     output {
         File deeptools_heatmap_genes = deeptools.heatmap_genes
         File deeptools_heatmap_tss = deeptools.heatmap_tss
         File deeptools_bw = deeptools.cleaned_deeptools_bw
-
     }
 }
 

@@ -17,3 +17,12 @@ workflows:
              - main
          tags:
              - /.*/
+             
+   - name: "FeatureCounts"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/featurecount/subwf-featurecount.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/

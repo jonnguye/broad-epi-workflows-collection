@@ -2,7 +2,7 @@ version 1.0
 
 import "../../tasks/task_star.wdl" as task_star
 
-workflow wf_deeptools{
+workflow wf_star{
     meta {
         version: 'v0.1'
             author: 'Siddarth Wekhande (swekhand@broadinstitute.org) @ Broad Institute of MIT and Harvard'

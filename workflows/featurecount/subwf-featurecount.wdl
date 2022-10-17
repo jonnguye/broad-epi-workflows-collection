@@ -11,9 +11,6 @@ workflow wf_featurecount{
 
     input {
         File input_bam
-        File chrom_sizes
-        File tss
-        File genes
         String prefix = "output-prefix"
         String genome_name
         String? docker

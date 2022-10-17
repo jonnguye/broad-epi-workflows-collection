@@ -1,5 +1,6 @@
 # broad-epi-workflows-collection
 This repo contains WDL workflows written by the Epigenomics program.
 
-List of tools: 
-	- Deeptools
+List of tools: <br>
+	- Deeptools <br>
+	- STAR

@@ -88,7 +88,7 @@ task feature_counts_rna {
         File rna_featurecount_alignment_index = out_bai
         File rna_featurecount_exon_txt = glob("*exon.featurecount.txt")[0]
         #File? rna_featurecount_intron_txt = glob("*intron.featurecount.txt")[0]
-        File count_matrix = glob({default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.featurecount.txt)[0]
+        File rna_featurecount_exon_matrix = glob("rna.featurecounts.alignment.wdup.exon*")[0]
     }
 
     runtime {

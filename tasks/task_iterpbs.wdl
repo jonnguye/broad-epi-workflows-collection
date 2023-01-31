@@ -29,7 +29,7 @@ task iter_pbs {
     B_compartments_bed: "bed file of B compartments"
     docker: "(optional) the docker image containing the runtime environment for this task"
     machine_mem_gb: "(optional) the amount of memory (GiB) to provision for this task"
-    disk: "(optional) the amount of disk space (GiB) to provision for this task"
+    disk_gb: "(optional) the amount of disk space (GiB) to provision for this task"
   }
 
   command {
@@ -45,8 +45,8 @@ task iter_pbs {
   runtime {
     docker: docker
     memory: "${machine_mem_gb} GiB"
-    disks: "local-disk ${disk} HDD"
-    disk: disk + " GB" 
+    disks: "local-disk ${disk_gb} HDD"
+    disk: disk_gb + " GB" 
   }
   output {
   

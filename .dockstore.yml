@@ -35,3 +35,12 @@ workflows:
              - main
          tags:
              - /.*/
+             
+   - name: "IterPBS"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/iterpbs/subwf-iterpbs.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/

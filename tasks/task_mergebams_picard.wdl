@@ -3,7 +3,7 @@ version 1.0
 task MergeSortBamFiles {
   input {
     Array[File] bam_inputs
-    String sort_order
+    String? sort_order
     String? prefix = "picard"
 
     Int compression_level = 5

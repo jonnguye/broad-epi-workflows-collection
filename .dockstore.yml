@@ -29,7 +29,7 @@ workflows:
              
     - name: "PicardMergeBams"
      subclass: WDL
-     primaryDescriptorPath: /workflows/featurecount/subwf-mergebams-picard.wdl
+     primaryDescriptorPath: /workflows/picard/subwf-mergebams-picard.wdl
      filters:  # Only develop or master branches and localAligner/** tags
          branches:
              - main

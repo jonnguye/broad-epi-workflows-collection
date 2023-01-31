@@ -18,7 +18,7 @@ task MergeSortBamFiles {
     Int preemptible = 0
   }
 
-  String? output_bam_filename = "${prefix}.merged.bam
+  String? output_bam_filename = "${prefix}.merged.bam"
   
   # give the command 500MiB of overhead
   Int command_mem_mb = machine_mem_mb - 500

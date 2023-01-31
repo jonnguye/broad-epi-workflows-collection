@@ -25,7 +25,6 @@ workflow wf_iterpbs{
     }
     
     output {
-        File merged_bam = merge.output_bam
         File pbs_corrected_bed = pbs.pbs_corrected_bed
         File pbs_corrected_plot = pbs.pbs_corrected_plot
         File pbs_original_plot = pbs.pbs_original_plot

@@ -13,8 +13,8 @@ workflow wf_mergebams_picard{
         Array[File] bam_inputs
         String? prefix
         String? sort_order = "coordinate"
-        cpu = 8
-        disk = 500
+        Int cpu = 8
+        Int disk = 500
     }
     
     call task_mergebams_picard.MergeSortBamFiles as merge{

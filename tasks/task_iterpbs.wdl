@@ -18,6 +18,7 @@ task iter_pbs {
   String output_pbs_corrected_plot = "${prefix}-fit-after-correction.png"
   String output_pbs_original_plot = "${prefix}-fit-before-correction.png"
   String output_pbs_compartment_fit_plot = "${prefix}-fit-per-compartment.png"
+  String output_pbs_joint_plot = "${prefix}-joint.png"
 
   meta {
     description: "Run Iterative PBS given A & B cmpartment file."
@@ -54,6 +55,7 @@ task iter_pbs {
     File pbs_corrected_plot = output_pbs_corrected_plot
     File pbs_original_plot = output_pbs_original_plot
     File pbs_compartment_fit_plot = output_pbs_compartment_fit_plot
+    File pbs_joint_plot = output_pbs_joint_plot
     
   }
 }

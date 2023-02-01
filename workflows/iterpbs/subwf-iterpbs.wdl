@@ -29,5 +29,6 @@ workflow wf_iterpbs{
         File pbs_corrected_plot = pbs.pbs_corrected_plot
         File pbs_original_plot = pbs.pbs_original_plot
         File pbs_compartment_fit_plot = pbs.pbs_compartment_fit_plot
+        File pbs_joint_plot = pbs.pbs_joint_plot
     }
 }

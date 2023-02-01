@@ -39,8 +39,8 @@ task iter_pbs {
     #reformats pbs bed file and outputs cleaned.bed
     Rscript $(which fixPBSOutput.R) -i ${binned_bed} 
     
-    bedtools intersect -a ${binned_bed} -b ${A_compartments_bed} > ${prefix}.A.binned_final.bed
-    bedtools intersect -a ${binned_bed} -b ${B_compartments_bed} > ${prefix}.B.binned_final.bed
+    bedtools intersect -a cleaned.bed -b ${A_compartments_bed} > ${prefix}.A.binned_final.bed
+    bedtools intersect -a cleaned.bed -b ${B_compartments_bed} > ${prefix}.B.binned_final.bed
     
     Rscript $(which IterPBS.R) -i cleaned.bed -a ${prefix}.A.binned_final.bed -b ${prefix}.B.binned_final.bed -p ${prefix}
     

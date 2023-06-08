@@ -53,7 +53,6 @@ task rna_align {
             --outSAMattributes NH HI AS nM MD \
             --limitOutSJcollapsed 2000000 \
             --outSAMtype BAM Unsorted \
-            --limitIObufferSize 400000000 \
             --outReadsUnmapped Fastx \
             --readFilesCommand zcat
 

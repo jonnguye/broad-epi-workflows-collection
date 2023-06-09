@@ -37,7 +37,7 @@ task rna_align {
     command {
         set -e
         # Untar the genome
-        tar xvzf ${genome_index_tar} --no-same-owner -C ./
+        tar xvzf ${genome_index_tar} --no-overwrite-dir --no-same-owner --no-same-permissions -C ./
 
         mkdir out
 

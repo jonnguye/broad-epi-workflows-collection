@@ -122,7 +122,7 @@ task assign_donors {
     }
 
     output {
-        File donor_assignments = "${assignments}
+        File donor_assignments = "${assignments}"
         File donor_assignments_vcf = "${assignments_vcf}"
     }
 

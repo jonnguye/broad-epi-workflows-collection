@@ -44,3 +44,12 @@ workflows:
              - main
          tags:
              - /.*/
+    
+    - name: "DropulationAssignDonors"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/dropulation/subwf-assign-donors.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/

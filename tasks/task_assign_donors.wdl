@@ -20,7 +20,7 @@ task assign_donors {
         File? annotations_gtf
         String modality
         String? prefix
-        String? docker_image = "us.gcr.io/landerlab-atacseq-200218/landerlab-dropseq-2.5.0:1.0"
+        String docker_image = "us.gcr.io/landerlab-atacseq-200218/landerlab-dropseq-2.5.0:1.0"
         Int cpus = 16
         Int disk_gb = 100
         Int mem_gb = 128

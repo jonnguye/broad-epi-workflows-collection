@@ -17,7 +17,6 @@ workflow wf_assign_donors{
         File? annotations_gtf
         String modality
         String? prefix
-        String? docker_image
     }
 
     call task_assign_donors.assign_donors as assign{
@@ -28,9 +27,7 @@ workflow wf_assign_donors{
             barcode_list = barcode_list,
             annotations_gtf = annotations_gtf,
             modality = modality,
-            prefix = prefix,
-            docker_image = docker_image
-    }
+            prefix = prefix    }
 
     output {
         File donor_assignments = assign.donor_assignments

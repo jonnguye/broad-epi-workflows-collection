@@ -27,7 +27,8 @@ workflow wf_assign_donors{
             barcode_list = barcode_list,
             annotations_gtf = annotations_gtf,
             modality = modality,
-            prefix = prefix    }
+            prefix = prefix
+    }
 
     output {
         File donor_assignments = assign.donor_assignments

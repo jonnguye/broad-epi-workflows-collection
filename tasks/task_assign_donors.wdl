@@ -34,16 +34,16 @@ task assign_donors {
         set -e
         /software/monitor_script.sh &
         
-        if ${modality} == "rna"
+        if [[ "${modality}" == "rna" ]]
         then
-            java -Xmx128g -jar /software/Drop-seq_tools-2.5.3/jar/dropseq.jar TagReadWithGeneFunction \
+            java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar TagReadWithGeneFunction \
             --ANNOTATIONS_FILE ${annotations_gtf} \
             -I ${input_bam} \
             -O tagread.bam
             
             rm ${input_bam}
             
-            java -Xmx128g -jar /home/rzhang/software/Drop-seq_tools-2.5.3/jar/dropseq.jar AssignCellsToSamples \
+            java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
             --INPUT_BAM tagread.bam \
             --VCF ${input_vcf} \
             --OUTPUT ${assignments} \
@@ -82,7 +82,7 @@ task assign_donors {
             --version false \
             --showHidden false 
         else
-            java -Xmx128g -jar /home/rzhang/software/Drop-seq_tools-2.5.3/jar/dropseq.jar AssignCellsToSamples \
+            java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
             --INPUT_BAM ${input_bam} \    
             --VCF ${input_vcf} \
             --OUTPUT ${assignments} \

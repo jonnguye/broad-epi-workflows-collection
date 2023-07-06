@@ -82,10 +82,10 @@ task assign_donors {
             --version false \
             --showHidden false 
         else
-            echo ${input_bam}
+            mv ${input_bam} tagread.bam
             
             java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
-            --INPUT_BAM ${input_bam} \    
+            --INPUT_BAM tagread.bam \
             --VCF ${input_vcf} \
             --OUTPUT ${assignments} \
             --VCF_OUTPUT ${assignments_vcf} \
@@ -119,7 +119,7 @@ task assign_donors {
             --CREATE_MD5_FILE false \
             --help false \
             --version false \
-            --showHidden false 
+            --showHidden false
        fi 
     }
 

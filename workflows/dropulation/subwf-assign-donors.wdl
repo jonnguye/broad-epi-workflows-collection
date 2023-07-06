@@ -10,7 +10,8 @@ workflow wf_assign_donors{
     }
 
     input {
-        File input_bam
+        Array[File] rna_bam
+        Array[File] atac_bam
         File input_vcf
         File input_vcf_index
         File barcode_list
@@ -18,21 +19,44 @@ workflow wf_assign_donors{
         String modality
         String? prefix
     }
+    
+    Boolean process_atac = if length(read1_atac)>0 then true else false
+    Boolean process_rna = if length(read1_rna)>0 then true else false
+    
+    if ( process_rna ) {
 
-    call task_assign_donors.assign_donors as assign{
-        input:
-            input_bam = input_bam,
-            input_vcf = input_vcf,
-            input_vcf_index = input_vcf_index,
-            barcode_list = barcode_list,
-            annotations_gtf = annotations_gtf,
-            modality = modality,
-            prefix = prefix
+        call task_assign_donors.assign_donors as rna_assign{
+            input:
+                input_bam = rna_bam,
+                input_vcf = input_vcf,
+                input_vcf_index = input_vcf_index,
+                barcode_list = barcode_list,
+                annotations_gtf = annotations_gtf,
+                modality = modality,
+                prefix = prefix
+        }
+    
+    }
+    
+    if ( process_atac ) {
+
+        call task_assign_donors.assign_donors as atac_assign{
+            input:
+                input_bam = atac_bam,
+                input_vcf = input_vcf,
+                input_vcf_index = input_vcf_index,
+                barcode_list = barcode_list,
+                modality = modality,
+                prefix = prefix
+        }
+    
     }
 
     output {
-        File donor_assignments = assign.donor_assignments
-        File donor_assignments_vcf = assign.donor_assignments_vcf
+        File? rna_donor_assignments = rna_assign.donor_assignments
+        File? rna_donor_assignments_vcf = rna_assign.donor_assignments_vcf
+        File? atac_donor_assignments = atac_assign.donor_assignments
+        File? atac_donor_assignments_vcf = atac_assign.donor_assignments_vcf
     }
 }
 

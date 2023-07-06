@@ -82,6 +82,8 @@ task assign_donors {
             --version false \
             --showHidden false 
         else
+            echo ${input_bam}
+            
             java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
             --INPUT_BAM ${input_bam} \    
             --VCF ${input_vcf} \

@@ -10,8 +10,8 @@ workflow wf_assign_donors{
     }
 
     input {
-        Array[File] rna_bam
-        Array[File] atac_bam
+        File rna_bam
+        File atac_bam
         File input_vcf
         File input_vcf_index
         File barcode_list
@@ -20,8 +20,8 @@ workflow wf_assign_donors{
         String? prefix
     }
     
-    Boolean process_atac = if length(read1_atac)>0 then true else false
-    Boolean process_rna = if length(read1_rna)>0 then true else false
+    Boolean process_atac = if atac_bam != "" then true else false
+    Boolean process_rna = if rna_bam != "" then true else false
     
     if ( process_rna ) {
 

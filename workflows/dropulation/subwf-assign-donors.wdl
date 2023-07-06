@@ -10,8 +10,8 @@ workflow wf_assign_donors{
     }
 
     input {
-        File rna_bam
-        File atac_bam
+        Array[File] rna_bam
+        Array[File] atac_bam
         File input_vcf
         File input_vcf_index
         File barcode_list
@@ -19,14 +19,14 @@ workflow wf_assign_donors{
         String? prefix
     }
     
-    Boolean process_atac = if atac_bam != "" then true else false
-    Boolean process_rna = if rna_bam != "" then true else false
+    Boolean process_atac = if length(atac_bam)>0 then true else false
+    Boolean process_rna = if length(rna_bam)>0 then true else false
     
     if ( process_rna ) {
 
         call task_assign_donors.assign_donors as rna_assign{
             input:
-                input_bam = rna_bam,
+                input_bam = rna_bam[0],
                 input_vcf = input_vcf,
                 input_vcf_index = input_vcf_index,
                 barcode_list = barcode_list,
@@ -41,7 +41,7 @@ workflow wf_assign_donors{
 
         call task_assign_donors.assign_donors as atac_assign{
             input:
-                input_bam = atac_bam,
+                input_bam = atac_bam[0],
                 input_vcf = input_vcf,
                 input_vcf_index = input_vcf_index,
                 barcode_list = barcode_list,

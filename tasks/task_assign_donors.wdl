@@ -34,6 +34,8 @@ task assign_donors {
         set -e
         /software/monitor_script.sh &
         
+        TMP_DIR=$(pwd)
+        
         if [[ "${modality}" == "rna" ]]
         then
             java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar TagReadWithGeneFunction \

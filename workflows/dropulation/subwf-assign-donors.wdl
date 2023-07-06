@@ -16,7 +16,6 @@ workflow wf_assign_donors{
         File input_vcf_index
         File barcode_list
         File? annotations_gtf
-        String modality
         String? prefix
     }
     
@@ -32,7 +31,7 @@ workflow wf_assign_donors{
                 input_vcf_index = input_vcf_index,
                 barcode_list = barcode_list,
                 annotations_gtf = annotations_gtf,
-                modality = modality,
+                modality = "rna",
                 prefix = prefix
         }
     
@@ -46,7 +45,7 @@ workflow wf_assign_donors{
                 input_vcf = input_vcf,
                 input_vcf_index = input_vcf_index,
                 barcode_list = barcode_list,
-                modality = modality,
+                modality = "atac",
                 prefix = prefix
         }
     

@@ -48,7 +48,7 @@ task assign_donors {
             
             rm ${input_bam}
             
-            java -Djava.io.tmpdir=${TEMP} -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
+            java -Djava.io.tmpdir=$(pwd) -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
             --INPUT_BAM tagread.bam \
             --VCF ${input_vcf} \
             --OUTPUT ${assignments} \
@@ -89,7 +89,7 @@ task assign_donors {
         else
             mv ${input_bam} tagread.bam
             
-            java -Djava.io.tmpdir=${TEMP} -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
+            java -Djava.io.tmpdir=$(pwd) -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
             --INPUT_BAM tagread.bam \
             --VCF ${input_vcf} \
             --OUTPUT ${assignments} \

@@ -6,3 +6,4 @@ List of tools: <br>
 	- STAR <br>
 	- MergeBams (Picard) <br>
 	- IterPBS
+ 	- Dropulation

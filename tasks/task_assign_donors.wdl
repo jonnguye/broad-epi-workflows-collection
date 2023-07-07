@@ -34,10 +34,10 @@ task assign_donors {
         set -e
         /software/monitor_script.sh &
         
-        TMP_DIR=$(pwd)
-        TMP=$(pwd)
-        TMPDIR=$(pwd)
-        TEMP=$(pwd)
+        #TMP_DIR=$(pwd)
+        #TMP=$(pwd)
+        #TMPDIR=$(pwd)
+        #TEMP=$(pwd)
         
         if [[ "${modality}" == "rna" ]]
         then
@@ -48,7 +48,7 @@ task assign_donors {
             
             rm ${input_bam}
             
-            java -Djava.io.tmpdir=$(pwd) -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
+            java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
             --INPUT_BAM tagread.bam \
             --VCF ${input_vcf} \
             --OUTPUT ${assignments} \
@@ -85,11 +85,12 @@ task assign_donors {
             --CREATE_MD5_FILE false \
             --help false \
             --version false \
+            --TMP_DIR $(pwd) \
             --showHidden false 
         else
             mv ${input_bam} tagread.bam
             
-            java -Djava.io.tmpdir=$(pwd) -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
+            java -Xmx128g -jar /software/Drop-seq_tools/jar/dropseq.jar AssignCellsToSamples \
             --INPUT_BAM tagread.bam \
             --VCF ${input_vcf} \
             --OUTPUT ${assignments} \
@@ -124,6 +125,7 @@ task assign_donors {
             --CREATE_MD5_FILE false \
             --help false \
             --version false \
+            --TMP_DIR $(pwd) \
             --showHidden false
        fi 
     }

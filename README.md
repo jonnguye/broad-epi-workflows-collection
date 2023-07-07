@@ -5,5 +5,5 @@ List of tools: <br>
 	- Deeptools <br>
 	- STAR <br>
 	- MergeBams (Picard) <br>
-	- IterPBS
+	- IterPBS <br>
  	- Dropulation

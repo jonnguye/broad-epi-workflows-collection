@@ -9,7 +9,7 @@ workflows:
          tags:
              - /.*/
 
-    - name: "Deeptools-bamCoverage"
+   - name: "Deeptools-bamCoverage"
      subclass: WDL
      primaryDescriptorPath: /workflows/deeptools/subwf-bamCoverage.wdl
      filters:  # Only develop or master branches and localAligner/** tags

@@ -8,6 +8,15 @@ workflows:
              - main
          tags:
              - /.*/
+
+    - name: "Deeptools-bamCoverage"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/deeptools/subwf-bamCoverage.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/
              
    - name: "STAR"
      subclass: WDL

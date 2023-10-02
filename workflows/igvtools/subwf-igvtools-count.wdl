@@ -9,9 +9,9 @@ workflow wf_igvtools{
             description: 'Broad Institute of MIT and Harvard: Deeptools.'
     }
 
-    call task_igvtools.igvtools as count
+    call task_igvtools.igvtools_count as count
 
     output {
-        File igvtools_count_bw = count.bigwig
+        File igvtools_count_bw = count.igvtools_count_bw
     }
 }

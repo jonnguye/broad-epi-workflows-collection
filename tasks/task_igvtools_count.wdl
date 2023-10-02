@@ -1,9 +1,9 @@
 version 1.0
 
 # TASK
-# deeptools
+# igvtools
 
-task deeptools {
+task igvtools_count {
     meta {
         version: 'v0.1'
         author: 'Eugenio Mattei (emattei@broadinstitute.org) at Broad Institute of MIT and Harvard'
@@ -56,7 +56,7 @@ task deeptools {
     >>>
 
     output {
-        File heatmap_genes = "${prefix}.bw"
+        File igvtools_count_bw = "${prefix}.bw"
     }
 
     runtime {

@@ -65,7 +65,7 @@ workflows:
 
    - name: "IgvtoolsCount"
      subclass: WDL
-     primaryDescriptorPath: /workflows/igvtools/subwf-igvtool-count.wdl
+     primaryDescriptorPath: /workflows/igvtools/subwf-igvtools-count.wdl
      filters:  # Only develop or master branches and localAligner/** tags
          branches:
              - main

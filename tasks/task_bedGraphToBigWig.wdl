@@ -1,9 +1,9 @@
 version 1.0
 
 # TASK
-# igvtools
+# bedGraphToBigWig
 
-task igvtools_count {
+task bedGraphToBigWig {
     meta {
         version: 'v0.1'
         author: 'Eugenio Mattei (emattei@broadinstitute.org) at Broad Institute of MIT and Harvard'
@@ -12,15 +12,9 @@ task igvtools_count {
 
     input {
         # This task takes in input the bedgraphs for input and ctrl and call peaks.
-        File sorted_bam  # Coordinates sorted
+        File bedGraph
         File chrom_sizes
 
-        Boolean? include_duplicates = false
-        Boolean? paired = true
-        Int? max_zoom = 1
-        Int? window_size = 25
-        Int? extend_factor = 150
-        Int? minimum_mapping_quality = 0
         String? prefix
 
         # Compute Resources
@@ -38,25 +32,11 @@ task igvtools_count {
 
     command <<<
         set -e
-
-        igvtools count \
-        ~{true='--includeDuplicates ' false='' include_duplicates} \
-        ~{true='--pairs ' false='' paired} \
-        ~{"-z " + max_zoom} \
-        ~{"-w " + window_size} \
-        ~{"-e " + extend_factor} \
-        ~{"-minMapQuality " + minimum_mapping_quality} \
-        ~{sorted_bam} \
-        ~{prefix}.wig \
-        ~{chrom_sizes}
-
-        wigToBigWig ~{prefix}.wig ~{chrom_sizes} ~{prefix}.bw
-
-
+        bedGraphToBigWig ~{bedGraph} ~{chrom_sizes} ~{prefix}.bw
     >>>
 
     output {
-        File igvtools_count_bw = "${prefix}.bw"
+        File converted_bw = "${prefix}.bw"
     }
 
     runtime {

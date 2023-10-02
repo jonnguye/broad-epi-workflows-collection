@@ -71,3 +71,12 @@ workflows:
              - main
          tags:
              - /.*/
+
+   - name: "BedGraphToBigWig"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/bedGraphToBigWig/subwf-bedGraphToBigWig.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/

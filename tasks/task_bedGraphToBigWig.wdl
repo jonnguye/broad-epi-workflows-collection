@@ -32,7 +32,7 @@ task bedGraphToBigWig {
 
     command <<<
         set -e
-        LC_ALL=C sort -k1,1 -k2,2n ~{bedGraph} > sorted
+        gzip -dc ~{bedGraph} | LC_ALL=C sort -k1,1 -k2,2n > sorted
         bedGraphToBigWig sorted ~{chrom_sizes} ~{prefix}.bw
     >>>
 

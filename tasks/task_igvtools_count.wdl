@@ -45,7 +45,7 @@ task igvtools_count {
         ~{"-z " + max_zoom} \
         ~{"-w " + window_size} \
         ~{"-e " + extend_factor} \
-        ~{"-minMapQuality " + minimum_mapping_quality} \
+        ~{"--minMapQuality " + minimum_mapping_quality} \
         ~{sorted_bam} \
         ~{prefix}.wig \
         ~{chrom_sizes}

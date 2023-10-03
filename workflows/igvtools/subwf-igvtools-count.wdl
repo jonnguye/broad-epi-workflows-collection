@@ -13,5 +13,6 @@ workflow wf_igvtools{
 
     output {
         File igvtools_count_bw = count.igvtools_count_bw
+        File igvtools_count_tdf = count.igvtools_count_tdf
     }
 }

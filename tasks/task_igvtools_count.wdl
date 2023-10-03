@@ -50,7 +50,7 @@ task igvtools_count {
         ~{prefix}_igvtools.wig \
         ~{chrom_sizes}
 
-        wigToBigWig ~{prefix}.wig ~{chrom_sizes} ~{prefix}.bw
+        wigToBigWig ~{prefix}_igvtools.wig ~{chrom_sizes} ~{prefix}_igvtools.bw
 
         igvtools count \
         ~{true='--includeDuplicates ' false='' include_duplicates} \

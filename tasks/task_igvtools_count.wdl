@@ -47,16 +47,28 @@ task igvtools_count {
         ~{"-e " + extend_factor} \
         ~{"--minMapQuality " + minimum_mapping_quality} \
         ~{sorted_bam} \
-        ~{prefix}.wig \
+        ~{prefix}_igvtools.wig \
         ~{chrom_sizes}
 
         wigToBigWig ~{prefix}.wig ~{chrom_sizes} ~{prefix}.bw
+
+        igvtools count \
+        ~{true='--includeDuplicates ' false='' include_duplicates} \
+        ~{true='--pairs ' false='' paired} \
+        ~{"-z " + max_zoom} \
+        ~{"-w " + window_size} \
+        ~{"-e " + extend_factor} \
+        ~{"--minMapQuality " + minimum_mapping_quality} \
+        ~{sorted_bam} \
+        ~{prefix}_igvtools.tdf \
+        ~{chrom_sizes}
 
 
     >>>
 
     output {
-        File igvtools_count_bw = "${prefix}.bw"
+        File igvtools_count_bw = "${prefix}_igvtools.bw"
+        File igvtools_count_tdf = "${prefix}_igvtools.tdf"
     }
 
     runtime {

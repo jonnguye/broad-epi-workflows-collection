@@ -80,3 +80,12 @@ workflows:
              - main
          tags:
              - /.*/
+
+   - name: "BigWigAverageOverBed"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/bigWigAverageOverBed/subwf-bigWigAverageOverBed.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/

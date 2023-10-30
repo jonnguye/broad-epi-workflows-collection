@@ -28,6 +28,7 @@ ENV PATH="/software:${PATH}"
 
 RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/wigToBigWig && chmod 750 wigToBigWig
 RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/bedGraphToBigWig && chmod 750 bedGraphToBigWig
+RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/bigWigAverageOverBed && chmod 750 bigWigAverageOverBed
 RUN wget https://data.broadinstitute.org/igv/projects/downloads/2.16/IGV_2.16.2.zip && unzip IGV_2.16.2.zip && mv IGV_2.16.2 igvtools && rm IGV_2.16.2.zip
 
 FROM openjdk:11-jre

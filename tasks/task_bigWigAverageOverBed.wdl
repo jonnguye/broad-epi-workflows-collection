@@ -16,6 +16,7 @@ task bigWigAverageOverBed {
         File regions
 
         String? prefix
+        String? suffix
 
         # Compute Resources
         Int? cpus = 1
@@ -32,11 +33,11 @@ task bigWigAverageOverBed {
 
     command <<<
         set -e
-        bigWigAverageOverBed -minMax ~{bigWig} ~{regions} ~{prefix}.bigWigAverage.counts.tsv
+        bigWigAverageOverBed -minMax ~{bigWig} ~{regions} ~{prefix}.bigWigAverage.~{suffix}counts.tsv
     >>>
 
     output {
-        File bigWigAveragedOverBed = "${prefix}.complete.tsv"
+        File bigWigAveragedOverBed = "~{prefix}.bigWigAverage.~{suffix}counts.tsv"
     }
 
     runtime {

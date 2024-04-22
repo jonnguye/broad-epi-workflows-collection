@@ -1,6 +1,7 @@
 import datetime
 from google.cloud import storage
 from google.oauth2 import service_account
+from urllib.parse import quote
 from typing import Optional
 
 def generate_download_signed_url_v4(bucket_name: str, blob_name: str, service_account_file: str, expiration_days: Optional[int] = 1) -> str:
@@ -41,3 +42,22 @@ def generate_download_signed_url_v4(bucket_name: str, blob_name: str, service_ac
 
 # Example usage
 # print(generate_download_signed_url_v4("bucket-name", "object-name", "service-account-key.json"))
+
+
+def encodeURIComponent(gs_path: str, safe: Optional[str] = '') -> str:
+    """
+    Encodes a Google Cloud Storage (GCS) path using URL encoding.
+
+    Args:
+        gs_path (str): The GCS path to be encoded.
+        safe (str, optional): Additional characters that should not be encoded. Defaults to an empty string.
+
+    Returns:
+        str: The encoded GCS path.
+
+    Example:
+        >>> gs_path = 'gs://my-bucket/my file.txt'
+        >>> encodeURIComponent(gs_path)
+        'gs%3A%2F%2Fmy-bucket%2Fmy%20file.txt'
+    """
+    return quote(gs_path, safe)

@@ -4,7 +4,7 @@ from google.oauth2 import service_account
 from urllib.parse import quote
 from typing import Optional
 
-def generate_download_signed_url_v4(bucket_name: str, blob_name: str, service_account_file: str, expiration_days: Optional[int] = 1) -> str:
+def generate_signed_url_v4(bucket_name: str, blob_name: str, service_account_file: str, expiration_minutes: Optional[int] = 300) -> str:
     """
     Generates a v4 signed URL for downloading a blob.
 
@@ -33,7 +33,7 @@ def generate_download_signed_url_v4(bucket_name: str, blob_name: str, service_ac
     url = blob.generate_signed_url(
         version="v4",
         # This URL is valid for 1 day
-        expiration=datetime.timedelta(days=expiration_days),
+        expiration=datetime.timedelta(minutes=expiration_minutes),
         # Allow GET requests using this URL.
         method="GET"
     )
@@ -41,10 +41,10 @@ def generate_download_signed_url_v4(bucket_name: str, blob_name: str, service_ac
     return url
 
 # Example usage
-# print(generate_download_signed_url_v4("bucket-name", "object-name", "service-account-key.json"))
+# print(generate_signed_url_v4("bucket-name", "object-name", "service-account-key.json"))
 
 
-def encodeURIComponent(gs_path: str, safe: Optional[str] = '') -> str:
+def encode_uri_component(gs_path: str, safe: Optional[str] = '') -> str:
     """
     Encodes a Google Cloud Storage (GCS) path using URL encoding.
 

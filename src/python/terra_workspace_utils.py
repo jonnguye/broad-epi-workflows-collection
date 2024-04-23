@@ -83,24 +83,23 @@ def get_all_outputs(ws_project, ws_name, workflows_by_submission):
     all_outputs_list = []
 
     # {submission_id: [workflow_ids]}
-    for submission_id, workflows in workflows_by_submission.items():
-        for workflow_id in workflows:
-            # get workflow's output metadata
-            workflow_metadata, workflow_metadata_exists = get_workflow_outputs(ws_project, ws_name, submission_id, workflow_id)
-           
-            # if there is any workflow metadata - metadata for workflows over a year old is deleted
-            if workflow_metadata_exists:
+    for workflow in workflows_by_submission:
+        # get workflow's output metadata
+        workflow_metadata, workflow_metadata_exists = get_workflow_outputs(ws_project, ws_name, workflow["submission_id"], workflow["workflow_id"])
+        
+        # if there is any workflow metadata - metadata for workflows over a year old is deleted
+        if workflow_metadata_exists:
 
-                # get list of keys ("task") that have an outputs section in returned workflow metadata
-                all_tasks = list(workflow_metadata["tasks"].keys())
-                tasks_with_outputs = [task for task in all_tasks if "outputs" in workflow_metadata["tasks"][task].keys()]
+            # get list of keys ("task") that have an outputs section in returned workflow metadata
+            all_tasks = list(workflow_metadata["tasks"].keys())
+            tasks_with_outputs = [task for task in all_tasks if "outputs" in workflow_metadata["tasks"][task].keys()]
 
-                for task in tasks_with_outputs:
-                    # get workflow level outputs
-                    workflow_outputs = workflow_metadata["tasks"][task]["outputs"]
-                    
-                    for wf_output_name, wf_output_value in workflow_outputs.items():
-                        all_outputs_list.append(wf_output_value)
+            for task in tasks_with_outputs:
+                # get workflow level outputs
+                workflow_outputs = workflow_metadata["tasks"][task]["outputs"]
+                
+                for wf_output_name, wf_output_value in workflow_outputs.items():
+                    all_outputs_list.append(wf_output_value)
 
     return all_outputs_list
 

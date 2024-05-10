@@ -2,7 +2,7 @@ version: 1.2
 workflows:
    - name: "Bwtool"
      subclass: WDL
-     primaryDescriptorPath: /workflows/bwtool/subwf-bwtool.wdl
+     primaryDescriptorPath: /workflows/bwtool/subwf-bwtool-aggregate.wdl
      filters:  # Only develop or master branches and localAligner/** tags
          branches:
              - main

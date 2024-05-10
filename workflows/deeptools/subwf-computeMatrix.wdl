@@ -1,6 +1,6 @@
 version 1.0
 
-import "/tasks/task_deeptools_computeMatrix.wdl" as deeptools_compute_matrix
+import "tasks/task_deeptools_computeMatrix.wdl" as deeptools_compute_matrix
 
 workflow deeptools_compute_matrix{
     meta {

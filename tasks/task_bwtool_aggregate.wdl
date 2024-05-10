@@ -38,6 +38,7 @@ task bwtool_aggregate {
 
 
     command {
+        
         /software/bwtool aggregate \
             ${true='-starts ' false='' starts} \
             ${true='-ends ' false='' ends} \

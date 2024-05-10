@@ -38,15 +38,15 @@ task bwtool_aggregate {
 
 
     command {
-        
+
         /software/bwtool aggregate \
-            ${true='-starts ' false='' starts} \
-            ${true='-ends ' false='' ends} \
+            ${true='-starts ' false=' ' starts} \
+            ${true='-ends ' false=' ' ends} \
             ${ranges} \
-            ${true='-expanded ' false='' expanded} \
-            ${true='-firstbase ' false='' firstbase} \
+            ${true='-expanded ' false=' ' expanded} \
+            ${true='-firstbase ' false=' ' firstbase} \
             ${cluster_k} \
-            ${true='-long-form ' false='' long_form} \
+            ${true='-long-form ' false=' ' long_form} \
             ${sep="," regions_bed} \
             ${sep="," bigwigs} \
             ${output_aggregate} \

@@ -129,3 +129,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+data/
+workflows/trackview_ucsc/generate-trackhub-session-example-local.ipynb

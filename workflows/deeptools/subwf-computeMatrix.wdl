@@ -13,7 +13,6 @@ workflow deeptools_compute_matrix{
 
     output {
         File deeptools_computed_matrix = computeMatrix.deeptools_computed_matrix
-        File deeptools_computed_matrix_plot = computeMatrix.deeptools_heatmap
         }
 }
 

@@ -48,13 +48,10 @@ task deeptools_computeMatrix {
             ${"--sortRegions " + sortRegions} \
             ${"-bs " + bin_size} \
             -o ${prefix}.mat.gz
-
-        plotHeatmap -m ${prefix}.mat.gz -o ${prefix}.heatmap.pdf
     }
 
     output {
-        File deeptools_computed_matrix = "$${prefix}.mat.gz"
-        File deeptools_heatmap = "${prefix}.heatmap.tss.pdf"
+        File deeptools_computed_matrix = "${prefix}.mat.gz"
     }
 
     runtime {

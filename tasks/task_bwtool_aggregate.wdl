@@ -21,6 +21,7 @@ task bwtool_aggregate {
         Boolean? firstbase
         Int? cluster_k
         Boolean? long_form
+        Array[String]? long_form_labels
         Array[File] bigwigs
         Array[File] regions_bed
         String docker_image = "polumechanos/bwtools"
@@ -47,7 +48,7 @@ task bwtool_aggregate {
             ${true='-expanded ' false=' ' expanded} \
             ${true='-firstbase ' false=' ' firstbase} \
             ${cluster_k} \
-            ${true='-long-form ' false=' ' long_form} \
+            ${true='-long-form=Regions,' false=' ' long_form}${sep="," long_form_labels } \
             ${sep="," regions_bed} \
             ${sep="," bigwigs} \
             ${output_aggregate} \

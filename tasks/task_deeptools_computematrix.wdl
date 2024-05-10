@@ -12,9 +12,9 @@ task deeptools_computeMatrix {
 
     input {
         # This task takes in input the bigwigs for input and produce the count matrix.
-        Int? cpus = 16
-        Int? memory_gb = 64
-        Int? bin_size = 50
+        Int cpus = 16
+        Int memory_gb = 64
+        Int bin_size = 50
         Array[File] bigwigs
         Array[File] regions_bed
         String docker_image = "njaved/deeptools"
@@ -42,12 +42,13 @@ task deeptools_computeMatrix {
             --beforeRegionStartLength ${beforeRegionStartLength} \
             --afterRegionStartLength ${afterRegionStartLength} \
             -p 16 \
-            --skipZeros \
+            ${true='--skipZeros ' false='' skipZeros} \
             ${"--regionBodyLength " + regionBodyLength} \
+            ${"--bs " + bin_size} \
             -o ${prefix}.mat.gz
 
         plotHeatmap -m ${prefix}.mat.gz -o ${prefix}.heatmap.pdf
-        }
+    }
 
     output {
         File deeptools_computed_matrix = "$${prefix}.mat.gz"

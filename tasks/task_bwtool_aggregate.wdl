@@ -24,7 +24,7 @@ task bwtool_aggregate {
         Array[File] bigwigs
         Array[File] regions_bed
         String docker_image = "polumechanos/bwtools"
-        String? prefix
+        String prefix = "bwtool"
 
     }
 

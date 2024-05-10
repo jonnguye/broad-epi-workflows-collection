@@ -1,6 +1,6 @@
 version 1.0
 
-import "tasks/task_deeptools_computeMatrix.wdl" as deeptools_compute_matrix
+import "../../tasks/task_deeptools_computematrix.wdl" as compute_matrix
 
 workflow deeptools_compute_matrix{
     meta {
@@ -9,7 +9,7 @@ workflow deeptools_compute_matrix{
             description: 'Broad Institute of MIT and Harvard: Deeptools.'
     }
 
-    call deeptools_compute_matrix.deeptools_computeMatrix as computeMatrix
+    call compute_matrix.deeptools_computeMatrix as computeMatrix
 
     output {
         File deeptools_computed_matrix = computeMatrix.deeptools_computed_matrix

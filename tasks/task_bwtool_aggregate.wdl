@@ -25,6 +25,7 @@ task bwtool_aggregate {
         Array[File] regions_bed
         String docker_image = "polumechanos/bwtools"
         String prefix = "bwtool"
+        String extra_annotation = ""
 
     }
 
@@ -33,8 +34,8 @@ task bwtool_aggregate {
     Int mem_gb = memory_gb
     #Int disk_gb = round(20.0 + 4 * input_file_size_gb)
     Int disk_gb = 100
-    String cluster_file = "${prefix}_cluster_annotated_k_${cluster_k}.bed"
-    String output_aggregate = "${prefix}_aggregate.txt"
+    String cluster_file = "${prefix}_${extra_annotation}_cluster_annotated_k_${cluster_k}.bed"
+    String output_aggregate = "${prefix}_${extra_annotation}_aggregate.txt"
 
 
     command {

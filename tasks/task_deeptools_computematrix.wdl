@@ -25,6 +25,7 @@ task deeptools_computeMatrix {
         Int afterRegionStartLength = 3000
         Int? regionBodyLength
         Boolean skipZeros = true
+        String sortRegions = "keep"
 
     }
 
@@ -44,7 +45,8 @@ task deeptools_computeMatrix {
             -p 16 \
             ${true='--skipZeros ' false='' skipZeros} \
             ${"--regionBodyLength " + regionBodyLength} \
-            ${"--bs " + bin_size} \
+            ${"--sortRegions " + sortRegions} \
+            ${"-bs " + bin_size} \
             -o ${prefix}.mat.gz
 
         plotHeatmap -m ${prefix}.mat.gz -o ${prefix}.heatmap.pdf

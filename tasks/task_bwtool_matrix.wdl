@@ -36,8 +36,9 @@ task bwtool_matrix {
     Int mem_gb = memory_gb
     #Int disk_gb = round(20.0 + 4 * input_file_size_gb)
     Int disk_gb = 100
-    String cluster_file = "${prefix}_${extra_annotation}__matrix_cluster_annotated_k_${cluster_k}.bed"
-    String output_matrix = "${prefix}_${extra_annotation}_matrix.txt"
+    String region_basenames = basename(regions_bed[0])
+    String cluster_file = "${prefix}_${extra_annotation}_${region_basenames}_matrix_cluster_annotated_k_${cluster_k}.bed"
+    String output_matrix = "${prefix}_${extra_annotation}_${region_basenames}_matrix.txt"
 
 
     command {

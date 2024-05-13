@@ -9,6 +9,15 @@ workflows:
          tags:
              - /.*/
 
+   - name: "Bwtool_matrix"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/bwtool/subwf-bwtool-matrix.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/
+
    - name: "Deeptools"
      subclass: WDL
      primaryDescriptorPath: /workflows/deeptools/subwf-deeptools.wdl

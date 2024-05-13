@@ -45,14 +45,13 @@ task bwtool_aggregate {
             ${true='-starts ' false=' ' starts} \
             ${true='-ends ' false=' ' ends} \
             ${ranges} \
-            ${true='-expanded ' false=' ' expanded} \
-            ${true='-firstbase ' false=' ' firstbase} \
-            ${cluster_k} \
-            ${true='-long-form=Regions,' false=' ' long_form}${sep="," long_form_labels } \
             ${sep="," regions_bed} \
             ${sep="," bigwigs} \
             ${output_aggregate} \
-            ${"-cluster " + cluster_k}
+            ${true='-expanded ' false=' ' expanded} \
+            ${true='-firstbase ' false=' ' firstbase} \
+            ${true='-long-form=Regions,' false=' ' long_form}${sep="," long_form_labels } \
+            ${"-cluster=" + cluster_k}
     }
 
     output {

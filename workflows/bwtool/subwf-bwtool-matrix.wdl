@@ -10,12 +10,14 @@ workflow bwtool_matrix_wf {
     }
     input {
         Array[File] bwtool_matrix_regions
+        Array[String] ranges
     }
     
-    scatter (region in bwtool_matrix_regions) {
+    scatter (idx in range(length(bwtool_matrix_regions))) {
         call bwtool_matrix.bwtool_matrix as bwtool_matrix{
             input:
-                regions_bed = [region]
+                regions_bed = [bwtool_matrix_regions[idx]],
+                ranges = ranges[idx]
         }
     }
 

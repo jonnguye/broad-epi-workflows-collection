@@ -9,11 +9,22 @@ workflow bwtool_aggregate_wf {
             description: 'Broad Institute of MIT and Harvard: Deeptools.'
     }
 
-    call bwtool_aggregate.bwtool_aggregate as bwtool_aggregate
+    input {
+        Array[File] bwtool_aggregate_regions
+        Array[String] ranges
+    }
+
+    scatter (idx in range(length(bwtool_aggregate_regions))) {
+        call bwtool_aggregate.bwtool_aggregate as bwtool_aggregate {
+            input: 
+                regions_bed = [bwtool_aggregate_regions[idx]],
+                ranges = ranges[idx]
+        }
+    }
 
     output {
-        File bwtool_aggregate_output = bwtool_aggregate.bwtool_aggregate_output
-        File? bwtool_cluster_output = bwtool_aggregate.bwtool_cluster_output
+        Array[File] bwtool_aggregate_output = bwtool_aggregate.bwtool_aggregate_output
+        Array[File?] bwtool_cluster_output = bwtool_aggregate.bwtool_cluster_output
         }
 }
 

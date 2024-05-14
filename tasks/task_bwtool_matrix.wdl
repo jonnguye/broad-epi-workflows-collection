@@ -16,7 +16,7 @@ task bwtool_matrix {
         Int memory_gb = 64
         Boolean? starts
         Boolean? ends
-        String? ranges
+        String ranges
         Int? cluster_k
         Int? tiled_averages
         Boolean? long_form
@@ -36,7 +36,7 @@ task bwtool_matrix {
     Int mem_gb = memory_gb
     #Int disk_gb = round(20.0 + 4 * input_file_size_gb)
     Int disk_gb = 100
-    String region_basenames = basename(regions_bed[0])
+    String region_basenames = basename(regions_bed[0], ".bed")
     String cluster_file = "${prefix}_${extra_annotation}_${region_basenames}_matrix_cluster_annotated_k_${cluster_k}.bed"
     String output_matrix = "${prefix}_${extra_annotation}_${region_basenames}_matrix.txt"
 

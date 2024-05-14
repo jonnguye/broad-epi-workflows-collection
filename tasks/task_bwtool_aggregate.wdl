@@ -16,7 +16,7 @@ task bwtool_aggregate {
         Int memory_gb = 64
         Boolean? starts
         Boolean? ends
-        String? ranges
+        String ranges
         Boolean? expanded
         Boolean? firstbase
         Int? cluster_k
@@ -35,8 +35,9 @@ task bwtool_aggregate {
     Int mem_gb = memory_gb
     #Int disk_gb = round(20.0 + 4 * input_file_size_gb)
     Int disk_gb = 100
-    String cluster_file = "${prefix}_${extra_annotation}_cluster_annotated_k_${cluster_k}.bed"
-    String output_aggregate = "${prefix}_${extra_annotation}_aggregate.txt"
+    String region_basenames = basename(regions_bed[0], ".bed")
+    String cluster_file = "${prefix}_${extra_annotation}_${region_basenames}_cluster_annotated_k_${cluster_k}.bed"
+    String output_aggregate = "${prefix}_${extra_annotation}_${region_basenames}_aggregate.txt"
 
 
     command {

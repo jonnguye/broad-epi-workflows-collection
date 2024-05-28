@@ -65,7 +65,7 @@ task feature_counts_rna {
     }
 
     output {
-        File rna_featurecount_summary = "{featurecount_out}.summary.txt"
+        File rna_featurecount_summary = "${featurecount_out}.summary.txt"
         File rna_featurecount_counts = "${featurecount_out}"
     }
 

@@ -53,6 +53,7 @@ task feature_counts_rna {
             ${"-a " + gtf} \
             ${"-t " + feature_type} \
             ${"-g " + gene_naming} \
+            ${"-F " + format} \
             -o ${featurecount_out} \
             -R BAM \
             ${if paired then "-p " else ""} \

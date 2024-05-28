@@ -57,7 +57,7 @@ task feature_counts_rna {
             -o ${featurecount_out} \
             -R BAM \
             ${if paired then "-p " else ""} \
-            ${true='−−countReadPairs ' false=' ' counts_fragments} \
+            ${true='--countReadPairs ' false=' ' counts_fragments} \
             temp_input.bam >> ${featurecount_log}
 
             mv ${featurecount_out}.summary ${featurecount_out}.summary.txt

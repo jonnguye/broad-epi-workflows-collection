@@ -67,6 +67,7 @@ task bwtool_matrix {
         memory : mem_gb+'G'
         disks : 'local-disk ${disk_gb} SSD'
         docker : docker_image
+        monitoring_script: "gs://fc-a30e1a42-4d9b-4dc9-b343-aab547e1ee09/cromwell_monitoring_script2.sh"
     }
 
 }

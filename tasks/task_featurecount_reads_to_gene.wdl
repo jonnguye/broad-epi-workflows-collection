@@ -18,11 +18,8 @@ task feature_counts_rna {
         Boolean multimapper
         Boolean intron
         Boolean paired
-        Boolean counts_fragments
         File bam
         File gtf
-        String feature_type = "exon"
-        String format # SAF/GTF
         String gene_naming = "gene_name"
         String genome_name
         String? prefix
@@ -36,8 +33,9 @@ task feature_counts_rna {
     
     #Int disk_gb = round(20.0 + 4 * input_file_size_gb)
 
+    String out_bam = "${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.bam"
+    String out_bai = "${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.bam.bai"
     String featurecount_log = "${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.featurecount.log"
-    String featurecount_out = "${default="share-seq" prefix}.rna.featurecounts.alignment.wdup.${if multimapper then "multi" else "unique"}.${if intron then "intron" else "exon"}.${genome_name}.featurecount.out.txt"
 
 
     command {
@@ -50,22 +48,46 @@ task feature_counts_rna {
         # For unique mappers use '-Q 30'
         featureCounts -T ${cpus} \
             -Q ${if multimapper then "0 -M " else "30"} \
-            ${"-a " + gtf} \
-            ${"-t " + feature_type} \
-            ${"-g " + gene_naming} \
-            -o ${featurecount_out} \
+            -a ${gtf} \
+            -t exon \
+            -g ${gene_naming} \
+            -o exon_count_matrix.txt \
             -R BAM \
-            ${if paired then "-p " else ""} \
-            ${true='−−countReadPairs ' false=' ' counts_fragments} \
+            ${if paired then "-p" else ""} \
             temp_input.bam >> ${featurecount_log}
 
-            mv ${featurecount_out}.summary ${featurecount_out}.summary.txt
+            mv exon_count_matrix.txt.summary summary.exon.featurecount.txt
+
+        temp_filename="temp_input.bam.featureCounts.bam"
+
+        # Extract reads that assigned to genes
+        if [[ ${intron} == "true" ]]; then
+            featureCounts -T ${cpus} \
+            -Q ${if multimapper then "0 -M " else "30"} \
+            -a ${gtf} \
+            -t gene \
+            -g ${gene_naming} \
+            -o intron_count_matrix.txt \
+            -R BAM \
+            ${if paired then "-p" else ""} \
+            $temp_filename >> ${featurecount_log}
+
+            mv intron_count_matrix.txt.summary summary.intron.featurecount.txt
+
+            temp_filename="$temp_filename.featureCounts.bam"
+        fi
+
+        samtools sort -@ ${cpus} -m 8G -o ${out_bam} $temp_filename
+        samtools index -@ ${cpus} ${out_bam}
 
     }
 
     output {
-        File rna_featurecount_summary = "{featurecount_out}.summary.txt"
-        File rna_featurecount_counts = "${featurecount_out}"
+        File rna_featurecount_alignment = out_bam
+        File rna_featurecount_alignment_index = out_bai
+        File rna_featurecount_exon_txt = glob("*exon.featurecount.txt")[0]
+        #File? rna_featurecount_intron_txt = glob("*intron.featurecount.txt")[0]
+        File rna_featurecount_exon_matrix = glob("exon_count_matrix.txt")[0]
     }
 
     runtime {
@@ -74,7 +96,6 @@ task feature_counts_rna {
         disks : 'local-disk ${disk_gb} SSD'
         maxRetries : 0
         docker: docker_image
-        monitoring_script: "gs://fc-a30e1a42-4d9b-4dc9-b343-aab547e1ee09/cromwell_monitoring_script2.sh"
     }
 
     parameter_meta {

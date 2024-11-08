@@ -19,6 +19,8 @@ task deeptools_computeMatrix {
         Array[File] regions_bed
         String docker_image = "njaved/deeptools"
         String? prefix
+        String? start_label
+        String? end_label
 
         String mode = "reference-point" # reference-point or scale-regions
         Int beforeRegionStartLength = 3000
@@ -46,6 +48,8 @@ task deeptools_computeMatrix {
             ${true='--skipZeros ' false='' skipZeros} \
             ${"--regionBodyLength " + regionBodyLength} \
             ${"--sortRegions " + sortRegions} \
+            ${"--startLabel " + start_label} \
+            ${"--endLabel " + end_label} \
             ${"-bs " + bin_size} \
             -o ${prefix}.mat.gz
     }

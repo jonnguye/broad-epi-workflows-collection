@@ -12,6 +12,7 @@ def extract_ids(data):
     except:
         return None, None  # Handle cases where there aren't enough parts
 
+#input is exported Terra table 
 file_path = "Team_1.tsv"
 df = pd.read_csv(file_path, sep='\t')
 

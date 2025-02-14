@@ -207,7 +207,9 @@ def get_gs_links_for_failed_workflows(ws_project: str, ws_name: str, submission_
     gs_paths = []
     for workflow in all_workflows["workflows"]:
         if workflow["status"] != "Succeeded" and "workflowId" in workflow:
-            gs_paths.append(f"{root}/{get_workflow_name(workflow)}/{workflow['workflowId']}")
+            gs_path = f"{root}/{get_workflow_name(workflow)}/{workflow['workflowId']}"
+            if requests.head(gs_path).status_code == 200:
+                gs_paths.append(gs_path)
     return gs_paths
 
 

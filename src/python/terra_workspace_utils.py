@@ -33,6 +33,7 @@ import sys
 
 from datetime import date
 from firecloud import api as fapi
+from google.cloud import storage
 from oauth2client.client import GoogleCredentials
 import time
 from typing import List, Dict, Any
@@ -203,12 +204,15 @@ def get_workflow_name(workflow_json: Dict[str, Any]) -> str:
 
 def get_gs_links_for_failed_workflows(ws_project: str, ws_name: str, submission_id: str) -> List[str]:
     all_workflows = get_workflows_by_submission(ws_project, ws_name, submission_id)
+    client = storage.Client()
     root = all_workflows["submissionRoot"]
     gs_paths = []
     for workflow in all_workflows["workflows"]:
         if workflow["status"] != "Succeeded" and "workflowId" in workflow:
             gs_path = f"{root}/{get_workflow_name(workflow)}/{workflow['workflowId']}"
-            if requests.head(gs_path).status_code == 200:
+            bucket = client.bucket(root)
+            blobs = list(bucket.list_blobs(prefix=gs_path))
+            if blobs:
                 gs_paths.append(gs_path)
     return gs_paths
 

@@ -206,12 +206,16 @@ def get_gs_links_for_failed_workflows(ws_project: str, ws_name: str, submission_
     all_workflows = get_workflows_by_submission(ws_project, ws_name, submission_id)
     client = storage.Client()
     root = all_workflows["submissionRoot"]
+    bucket_name = root.replace("gs://", "").split("/")[0]
+    prefix = "/".join(root.replace("gs://", "").split("/")[1:])
     gs_paths = []
     for workflow in all_workflows["workflows"]:
         if workflow["status"] != "Succeeded" and "workflowId" in workflow:
-            gs_path = f"{root}/{get_workflow_name(workflow)}/{workflow['workflowId']}"
-            bucket = client.bucket(root)
-            blobs = list(bucket.list_blobs(prefix=gs_path))
+            workflow_id = workflow["workflowId"]
+            workflow_name = get_workflow_name(workflow)
+            gs_path = f"{root}/{workflow_name}/{workflow_id}"
+            bucket = client.bucket(bucket_name)
+            blobs = list(bucket.list_blobs(prefix=f"{prefix}/{workflow_name}/{workflow_id}"))
             if blobs:
                 gs_paths.append(gs_path)
     return gs_paths

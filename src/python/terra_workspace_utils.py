@@ -212,7 +212,12 @@ def get_gs_links_for_failed_workflows(ws_project: str, ws_name: str, submission_
     for workflow in all_workflows["workflows"]:
         if workflow["status"] != "Succeeded" and "workflowId" in workflow:
             workflow_id = workflow["workflowId"]
-            workflow_name = get_workflow_name(workflow)
+            try:
+                workflow_name = get_workflow_name(workflow)
+            except:
+                msg = "Submission ID: " + submission_id + " " + "Workflow ID: " + workflow_id + " does not have workflow name." 
+                logging.error(msg)
+                continue
             gs_path = f"{root}/{workflow_name}/{workflow_id}"
             bucket = client.bucket(bucket_name)
             blobs = list(bucket.list_blobs(prefix=f"{prefix}/{workflow_name}/{workflow_id}"))

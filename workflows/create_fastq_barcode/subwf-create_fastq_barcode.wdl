@@ -36,6 +36,11 @@ task create_fastq_barcode {
     File fastq_file
   }
 
+  Float input_file_size_gb = size(fastq_file, "G")
+  Int disk_gb = round(20.0 + 3 * input_file_size_gb)
+  String disk_type = if disk_gb > 375 then "SSD" else "LOCAL"
+
+
   String prefix = basename(fastq_file, ".fastq.gz")
 
   command <<<
@@ -50,6 +55,7 @@ task create_fastq_barcode {
 
   runtime {
     docker: "ubuntu:latest"
+    disks : "local-disk ${disk_gb} ${disk_type}"
   }
 }
 
@@ -63,10 +69,13 @@ task split_onlist {
 
   String prefix = basename(onlist, "_whitelist.txt")
 
+  Int disk_gb = 50
+  String disk_type = if disk_gb > 375 then "SSD" else "LOCAL"
+
   command <<<
-    awk '{print substr($0,1,8)}' ~{onlist} > ~{prefix}_onlist_round1_subset.txt
-    awk '{print substr($0,9,8)}' ~{onlist} > ~{prefix}_onlist_round2.txt
-    awk '{print substr($0,17,8)}' ~{onlist} > ~{prefix}_onlist_round3.txt
+    awk '{print substr($0,1,8)}' ~{onlist} | uniq | sort -u > ~{prefix}_onlist_round1_subset.txt
+    awk '{print substr($0,9,8)}' ~{onlist} | uniq | sort -u > ~{prefix}_onlist_round2.txt
+    awk '{print substr($0,17,8)}' ~{onlist} | uniq | sort -u > ~{prefix}_onlist_round3.txt
     paste ~{prefix}_onlist_round1_subset.txt ~{prefix}_onlist_round2.txt ~{prefix}_onlist_round3.txt > ~{prefix}_onlist_multi_kb.txt
   >>>
 
@@ -79,5 +88,7 @@ task split_onlist {
 
   runtime {
     docker: "ubuntu:latest"
+    disks : "local-disk ${disk_gb} ${disk_type}"
+    preemptible: 3
   }
 }

@@ -44,8 +44,8 @@ task create_fastq_barcode {
   String prefix = basename(fastq_file, ".fastq.gz")
 
   command <<<
-    gzip -dc ~{fastq_file} | awk '{if(NR%4==2) print substr($0,1,length($0)-99)}' | gzip -c > ~{prefix}.barcodes.fastq.gz
-    gzip -dc ~{fastq_file} | awk '{if(NR%4==2) print substr($0,length($0)-99)}'   | gzip -c > ~{prefix}.R2_no_barcode.fastq.gz
+    gzip -dc ~{fastq_file} | awk '{if(NR%2==0) print substr($0,1,length($0)-99); else print $0}' | gzip -c > ~{prefix}.R2.fastq.gz
+    gzip -dc ~{fastq_file} | awk '{if(NR%2==0) print substr($0,length($0)-98); else print $0}'   | gzip -c > ~{prefix}.barcode_file.fastq.gz
   >>>
 
   output {

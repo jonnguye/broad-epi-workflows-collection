@@ -8,6 +8,15 @@ workflows:
              - main
          tags:
              - /.*/
+    
+   - name: "Create_FASTQ_barcode"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/create_fastq_barcode/subwf-create_fastq_barcode.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/
 
    - name: "Bwtool_matrix"
      subclass: WDL

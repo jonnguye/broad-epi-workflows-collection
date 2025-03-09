@@ -80,10 +80,10 @@ task split_onlist {
   >>>
 
   output {
-    File onlist_R1 = "onlist_round1_subset.txt"
-    File onlist_R2 = "onlist_round2.txt"
-    File onlist_R3 = "onlist_round3.txt"
-    File onlist_multi_kb = "onlist_multi_kb.txt"
+    File onlist_R1 = "~{prefix}_onlist_round1_subset.txt"
+    File onlist_R2 = "~{prefix}_onlist_round2.txt"
+    File onlist_R3 = "~{prefix}_onlist_round3.txt"
+    File onlist_multi_kb = "~{prefix}_onlist_multi_kb.txt"
   }
 
   runtime {

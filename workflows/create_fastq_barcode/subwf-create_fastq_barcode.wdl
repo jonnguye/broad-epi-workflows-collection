@@ -49,8 +49,8 @@ task create_fastq_barcode {
   >>>
 
   output {
-    File fastq_barcodes = "~{prefix}.barcodes.fastq.gz"
-    File fastq_R2_no_barcodes = "~{prefix}.R2_no_barcode.fastq.gz"
+    File fastq_barcodes = "~{prefix}.barcode_file.fastq.gz"
+    File fastq_R2_no_barcodes = "~{prefix}.R2.fastq.gz"
   }
 
   runtime {

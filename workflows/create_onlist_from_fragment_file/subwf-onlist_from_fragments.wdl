@@ -17,7 +17,6 @@ call create_onlist {
   }
 }
 
-
 task create_onlist{
     input {
         String fragment_file_gs

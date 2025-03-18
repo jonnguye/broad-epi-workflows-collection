@@ -17,6 +17,15 @@ workflows:
              - main
          tags:
              - /.*/
+    
+   - name: "Create_FASTQ_barcode"
+     subclass: WDL
+     primaryDescriptorPath: /workflows/create_onlist_from_fragment_file/subwf-onlist_from_fragments.wdl
+     filters:  # Only develop or master branches and localAligner/** tags
+         branches:
+             - main
+         tags:
+             - /.*/
 
    - name: "Bwtool_matrix"
      subclass: WDL

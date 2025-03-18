@@ -29,7 +29,7 @@ task create_onlist{
         File onlist = "${prefix}_onlist_from_frag.txt.gz"
     }
     runtime {
-        docker: "ubuntu:latest"
+        docker: "google/cloud-sdk:stable"
         cpu: "2"
         memory: "8 GB"
     }

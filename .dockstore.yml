@@ -18,7 +18,7 @@ workflows:
          tags:
              - /.*/
     
-   - name: "Create_FASTQ_barcode"
+   - name: "Create_onlist_from_fragment_file"
      subclass: WDL
      primaryDescriptorPath: /workflows/create_onlist_from_fragment_file/subwf-onlist_from_fragments.wdl
      filters:  # Only develop or master branches and localAligner/** tags

@@ -23,7 +23,7 @@ task create_onlist{
         String prefix
     }
     command {
-        gsutil cp ${fragment_file_gs} - | cut -f4 | uniq | sort -u | gzip -dc > ${prefix}_onlist_from_frag.txt.gz
+        gsutil cp ${fragment_file_gs} - | gzip -dc | cut -f4 | uniq | sort -u | gzip -c > ${prefix}_onlist_from_frag.txt.gz
     }
     output {
         File onlist = "${prefix}_onlist_from_frag.txt.gz"

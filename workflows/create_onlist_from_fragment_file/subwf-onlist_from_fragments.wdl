@@ -32,5 +32,6 @@ task create_onlist{
         docker: "google/cloud-sdk:stable"
         cpu: "2"
         memory: "8 GB"
+        disks: "local-disk 100 HDD" 
     }
 }

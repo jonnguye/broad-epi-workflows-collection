@@ -108,6 +108,12 @@ task feature_counts_rna {
                 help: 'The name genome reference used to align.',
                 examples: ['hg38', 'mm10', 'hg19', 'mm9'],
             }
+        strand: {
+                description: 'Strand',
+                help: 'Perform strand-specific read counting. 0: unstranded, 1: stranded, 2: reverse stranded',
+                default: '0',
+                examples: ['0','1','2']
+        }
         gene_naming: {
                 description: 'Gene nomenclature',
                 help: 'Choose if you want to use the official gene symbols (gene_name) or ensemble gene names (gene_id).',

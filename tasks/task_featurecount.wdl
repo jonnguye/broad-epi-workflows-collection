@@ -25,6 +25,7 @@ task feature_counts_rna {
         String format # SAF/GTF
         String gene_naming = "gene_name"
         String genome_name
+        Int strand = 0
         String? prefix
         String docker_image = "us.gcr.io/buenrostro-share-seq/share_task_count_rna"
         Int cpus = 6
@@ -54,6 +55,7 @@ task feature_counts_rna {
             ${"-t " + feature_type} \
             ${"-g " + gene_naming} \
             ${"-F " + format} \
+            -s ${strand} \
             -o ${featurecount_out} \
             -R BAM \
             ${if paired then "-p " else ""} \

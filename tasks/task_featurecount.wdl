@@ -18,6 +18,8 @@ task feature_counts_rna {
         Boolean multimapper
         Boolean intron
         Boolean paired
+        Boolean splitOnly
+        Boolean nonSplitOnly
         Boolean counts_fragments
         File bam
         File gtf
@@ -59,6 +61,8 @@ task feature_counts_rna {
             -o ${featurecount_out} \
             -R BAM \
             ${if paired then "-p " else ""} \
+            ${if splitOnly then "--splitOnly " else ""} \
+            ${if nonSplitOnly then "--nonSplitOnly " else ""} \
             ${true='--countReadPairs ' false=' ' counts_fragments} \
             temp_input.bam >> ${featurecount_log}
 
